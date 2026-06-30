@@ -90,7 +90,7 @@ function LineItems({ grouped, onQuantityChange }) {
                     </div>
                   )}
                   {/* Fixed-width price so it always aligns */}
-                  <div className="flex-shrink-0 w-[60px]">
+                  <div className="flex-shrink-0 w-[40px]">
                     <ItemPrice item={item} />
                   </div>
                 </div>
@@ -170,13 +170,13 @@ export function ReviewPanelF1735({ reviewItems, total, compareTotal, onQuantityC
 
             {/* Savings */}
             {savings > 0 && (
-              <div className="px-5 py-2.5 text-center text-[11.5px] font-semibold text-[#1A7A4A]">
+              <div className="px-5 text-center text-[11.5px] font-semibold text-[#1A7A4A]">
                 Congrats! You're saving ${savings.toFixed(2)} on your security bundle!
               </div>
             )}
 
             {/* Checkout */}
-            <div className="px-5 pt-4 pb-2">
+            <div className="px-5 pt-[4px] pb-2">
               <button onClick={() => { setCheckedOut(true); setTimeout(() => setCheckedOut(false), 2000); }}
                 className="w-full py-[13px] bg-[#4B4FD9] hover:bg-[#3D41C4] active:bg-[#3134A8] text-white font-bold text-[14.5px] rounded-lg transition-colors">
                 {checkedOut ? '✓ Order placed!' : 'Checkout'}
