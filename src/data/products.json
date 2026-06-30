@@ -17,9 +17,9 @@
           "image": "/images/wyze-cam-v4.png",
           "learnMore": "#",
           "variants": [
-            { "id": "wyze-cam-v4-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC" },
-            { "id": "wyze-cam-v4-grey",  "label": "Grey",  "color": "#888888" },
-            { "id": "wyze-cam-v4-black", "label": "Black", "color": "#222222" }
+            { "id": "wyze-cam-v4-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC", "image": "/images/wyze-cam-v4.png" },
+            { "id": "wyze-cam-v4-grey",  "label": "Grey",  "color": "#888888", "image": "/images/wyze-cam-v4.png" },
+            { "id": "wyze-cam-v4-black", "label": "Black", "color": "#222222", "image": "/images/wyze-cam-v4.png" }
           ]
         },
         {
@@ -32,8 +32,8 @@
           "image": "/images/wyze-cam-pan-v3.png",
           "learnMore": "#",
           "variants": [
-            { "id": "wyze-pan-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC" },
-            { "id": "wyze-pan-black", "label": "Black", "color": "#222222" }
+            { "id": "wyze-pan-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC", "image": "/images/wyze-cam-pan-v3.png" },
+            { "id": "wyze-pan-black", "label": "Black", "color": "#222222", "image": "/images/wyze-cam-pan-v3.png" }
           ]
         },
         {
@@ -46,8 +46,9 @@
           "image": "/images/wyze-cam-floodlight.png",
           "learnMore": "#",
           "variants": [
-            { "id": "wyze-flood-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC" },
-            { "id": "wyze-flood-black", "label": "Black", "color": "#222222" }
+            { "id": "wyze-flood-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC", "image": "/images/wyze-cam-floodlight.png" },
+            { "id": "wyze-flood-black", "label": "Black", "color": "#222222", "image": "/images/wyze-cam-floodlight.png" }
+
           ]
         },
         {
@@ -71,8 +72,8 @@
           "image": "/images/wyze-battery-cam.png",
           "learnMore": "#",
           "variants": [
-            { "id": "wyze-batt-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC" },
-            { "id": "wyze-batt-black", "label": "Black", "color": "#222222" }
+            { "id": "wyze-batt-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC", "image": "/images/wyze-battery-cam.png" },
+            { "id": "wyze-batt-black", "label": "Black", "color": "#222222", "image": "/images/wyze-battery-cam.png" }
           ]
         }
       ]
