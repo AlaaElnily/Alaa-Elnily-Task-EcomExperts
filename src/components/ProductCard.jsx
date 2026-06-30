@@ -26,8 +26,8 @@ export function ProductCardF1735({ product, quantity, activeVariantId, onQuantit
 
       {/* Body */}
       <div className="flex flex-col flex-1 px-3 pt-3 pb-2.5 gap-1 min-w-0">
-        <p className="text-[12.5px] font-bold text-[#1A1A2E] leading-tight">{product.name}</p>
-        <p className="text-[11px] text-[#6B6B80] leading-snug">
+        <p className="text-[14px] font-normal text-[#1F1F1F] leading-tight">{product.name}</p>
+        <p className="text-[12px] text-[#1F1F1FBF] leading-snug">
           {product.description}{' '}
           {product.learnMore && (
             <a href={product.learnMore}
@@ -43,7 +43,7 @@ export function ProductCardF1735({ product, quantity, activeVariantId, onQuantit
             {product.variants.map(variant => (
               <button key={variant.id}
               onClick={() => onVariantChange(product.id, variant.id)}
-              className={`flex items-center gap-[4px] px-[4px] py-[3px] pr-[7px] rounded-md text-[10.5px] font-medium border transition-colors
+              className={`flex items-center gap-[4px] px-[4px] py-[3px] pr-[7px] rounded-[2px] text-[10px] font-medium border transition-colors
                 ${activeVariantId === variant.id
                   ? 'border-green-100 bg-green-50'
                     : 'border-grey-50 bg-white hover:border-green-100'
@@ -66,13 +66,13 @@ export function ProductCardF1735({ product, quantity, activeVariantId, onQuantit
             max={product.maxQuantity ?? 99} size="card" />
           <div className="flex flex-col items-end leading-tight">
             {product.comparePrice != null && product.comparePrice > 0 && (
-              <span className="text-[10.5px] font-medium text-[#E05A1A] line-through">
+              <span className="text-[16px] font-normal text-[#D8392B] line-through">
                 ${product.comparePrice.toFixed(2)}{product.priceSuffix ?? ''}
               </span>
             )}
             {product.priceLabel
-              ? <span className="text-[13px] font-bold text-[#4B4FD9]">{product.priceLabel}</span>
-              : <span className="text-[13px] font-bold text-[#1A1A2E]">
+              ? <span className="text-[16px] font-normal text-[#4B4FD9]">{product.priceLabel}</span>
+              : <span className="text-[16px] font-normal text-[#575757]">
                   ${product.price.toFixed(2)}{product.priceSuffix ?? ''}
                 </span>
             }

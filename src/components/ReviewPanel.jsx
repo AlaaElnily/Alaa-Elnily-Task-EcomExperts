@@ -5,28 +5,57 @@ const CAT_LABELS = { cameras: 'CAMERAS', sensors: 'SENSORS', protection: 'ACCESS
 const CAT_ORDER  = ['cameras', 'sensors', 'protection', 'plan'];
 
 function TruckIcon() {
+  return <img src="/images/Wyze-Sense-Keypad.svg" alt="Fast Shipping" className="w-[32px] h-[32px] object-contain" />;
+}
+
+function GuaranteeBadge({ size = 'sm' }) {
+  const sz = size === 'lg' ? 'w-[80px] h-[80px]' : 'w-[58px] h-[58px]';
   return (
-    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8"
-      strokeLinecap="round" strokeLinejoin="round">
-      <rect x="1" y="3" width="15" height="13"/>
-      <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
-      <circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/>
-    </svg>
+    <img
+      src="/images/satisfaction-badge.svg"
+      alt="100% Wyze satisfaction guarantee"
+      className={`${sz} object-contain flex-shrink-0 select-none`}
+    />
   );
 }
 
-// Figma satisfaction badge — dark navy circle
-function GuaranteeBadge({ size = 'sm' }) {
-  const sz = size === 'lg' ? 'w-[80px] h-[80px]' : 'w-[58px] h-[58px]';
-  const pct = size === 'lg' ? 'text-[22px]' : 'text-[16px]';
-  const txt = size === 'lg' ? 'text-[7.5px]' : 'text-[6px]';
-  return (
-    <div className={`${sz} rounded-full bg-[#1A1A5E] border-[3px] border-[#3030AA]
-      flex flex-col items-center justify-center flex-shrink-0 text-white leading-tight select-none`}>
-      <span className={`${pct} font-black leading-none`}>100%</span>
-      <span className={`${txt} font-semibold text-center leading-[1.35] mt-[2px] px-1`}>
-        Wyze<br/>satisfaction<br/>guarantee
+function PlanLogo() {
+  return <img src="/images/Layer_1.svg" alt="Fast Shipping" className="w-[32px] h-[32px] object-contain" />;
+}
+
+// Renders a single line item's name — plan items get the two-tone Wyze brand treatment
+function ItemName({ item, isPlan }) {
+  if (isPlan) {
+    const [first, ...rest] = item.name.split(' ');
+    return (
+      <span className="flex items-center gap-1.5 flex-1 min-w-0">
+        <PlanLogo />
+        <span className="text-[13px] font-bold leading-snug">
+          <span className="text-[#1A1A2E]">{first}</span>
+          {rest.length > 0 && <span className="text-[#4B4FD9]"> {rest.join(' ')}</span>}
+        </span>
       </span>
+    );
+  }
+  return <p className="flex-1 min-w-0 text-[14px] font-normal text-[#0B0D10] leading-snug">{item.name}</p>;
+}
+
+// Price column: struck-through compare above the active (blue) price
+function ItemPrice({ item }) {
+  const showCompare = item.comparePrice != null && item.comparePrice > item.price;
+  return (
+    <div className="flex flex-col items-end leading-tight flex-shrink-0">
+      {showCompare && (
+        <span className="text-[10px] text-[#9898B0] line-through">
+          ${(item.comparePrice * item.quantity).toFixed(2)}{item.priceSuffix ?? ''}
+        </span>
+      )}
+      {item.price === 0
+        ? <span className="text-[12.5px] font-bold text-[#4B4FD9]">FREE</span>
+        : <span className="text-[12.5px] font-bold text-[#4B4FD9]">
+            ${(item.price * item.quantity).toFixed(2)}{item.priceSuffix ?? ''}
+          </span>
+      }
     </div>
   );
 }
@@ -35,41 +64,38 @@ function LineItems({ grouped, onQuantityChange }) {
   return (
     <>
       {Object.entries(grouped).map(([cat, items]) => (
-        <div key={cat} className="px-5 pt-[15px] pb-[10px] border-b border-[#E8E8F2]">
-          <p className="text-[9px] font-bold tracking-[0.14em] uppercase text-[#9898B0] mb-2.5">
+        <div key={cat} className="px-5 pt-[15px] pb-[14px] border-b border-[#E8E8F2]">
+          <p className="text-[12px] font-normal tracking-[0.14em] uppercase text-[#A8B2BD] mb-3">
             {CAT_LABELS[cat]}
           </p>
-          <div className="flex flex-col gap-3">
-            {items.map(item => (
-              <div key={item.key} className="flex items-center gap-3 w-full">
-                <img src={item.image} alt={item.name}
-                  className="w-9 h-9 object-contain rounded border border-[#E8E8F2] bg-[#F5F5FA] p-[3px] flex-shrink-0" />
-                <div className="flex flex-row justify-between items-center w-full">
-                  <p className="text-[11.5px] font-medium text-[#1A1A2E] leading-snug truncate">{item.name}</p>
-                    <QuantityStepper
-                      value={item.quantity}
-                      onChange={val => onQuantityChange(item.variantId ?? item.productId, val)}
-                      max={item.productId?.startsWith('plan-') ? 1 : 99}
-                      size="review"
-                    />
-                </div>
-                  <div className="flex items-center mt-[3px] gap-2">
-                    <div className="flex flex-col items-end leading-tight">
-                      {item.comparePrice != null && item.comparePrice > 0 && item.price === 0 && (
-                        <span className="text-[9.5px] text-[#9898B0] line-through">
-                          ${(item.comparePrice * item.quantity).toFixed(2)}
-                        </span>
-                      )}
-                      {item.price === 0
-                        ? <span className="text-[12.5px] font-bold text-[#4B4FD9]">FREE</span>
-                        : <span className="text-[12.5px] font-bold text-[#4B4FD9]">
-                            ${(item.price * item.quantity).toFixed(2)}{item.priceSuffix ?? ''}
-                          </span>
-                      }
+          <div className="flex flex-col gap-4">
+            {items.map(item => {
+              const isPlan = item.category === 'plan';
+              return (
+                <div key={item.key} className="flex items-center gap-3 w-full">
+                  {!isPlan && (
+                    <img src={item.image} alt={item.name}
+                      className="w-[60px] h-[60px] object-contain rounded-lg border border-[#E8E8F2] bg-white p-2 flex-shrink-0" />
+                  )}
+                  <ItemName item={item} isPlan={isPlan} />
+                  {/* Fixed-width stepper so it always aligns */}
+                  {!isPlan && (
+                    <div className="flex-shrink-0 w-[76px] flex justify-center">
+                      <QuantityStepper
+                        value={item.quantity}
+                        onChange={val => onQuantityChange(item.variantId ?? item.productId, val)}
+                        max={99}
+                        size="review"
+                      />
                     </div>
+                  )}
+                  {/* Fixed-width price so it always aligns */}
+                  <div className="flex-shrink-0 w-[60px]">
+                    <ItemPrice item={item} />
                   </div>
-              </div>
-            ))}
+                </div>
+              );
+            })}
           </div>
         </div>
       ))}
@@ -88,12 +114,12 @@ export function ReviewPanelF1735({ reviewItems, total, compareTotal, onQuantityC
   return (
     <div className="bg-brand-50 rounded-[10px] flex flex-col lg:min-w-[399px]">
       {/* REVIEW label */}
-      <div className="px-5 pt-[15px] pb-0 text-[9px] font-bold tracking-[0.16em] uppercase text-[#9898B0]">REVIEW</div>
+      <div className="px-5 pt-[15px] pb-0 text-[12px] font-normal tracking-[0.16em] uppercase text-[#484848]">REVIEW</div>
 
       {/* Heading */}
       <div className="px-5 pt-5 pb-[10px] border-b border-[#E8E8F2]">
-        <h2 className="text-[19px] font-bold text-[#1A1A2E] tracking-tight leading-tight">Your security system</h2>
-        <p className="text-[11px] text-[#9898B0] mt-[5px] leading-snug">
+        <h2 className="text-[22px] font-normal text-[#1F1F1F] tracking-tight leading-tight">Your security system</h2>
+        <p className="text-[14px] text-[#1F1F1FBF] mt-[5px] leading-snug">
           Review your personalized protection system designed to keep what matters most safe.
         </p>
       </div>
@@ -109,7 +135,7 @@ export function ReviewPanelF1735({ reviewItems, total, compareTotal, onQuantityC
         {hasItems && (
           <>
             {/* Shipping */}
-            <div className="px-5 py-3 flex items-center justify-between border-b border-[#E8E8F2]">
+            <div className="px-5 py-3 flex items-center justify-between">
               <div className="flex items-center gap-2.5">
                 <div className="w-8 h-8 rounded bg-[#EEF0FF] flex items-center justify-center text-[#4B4FD9] flex-shrink-0">
                   <TruckIcon />
@@ -125,17 +151,17 @@ export function ReviewPanelF1735({ reviewItems, total, compareTotal, onQuantityC
             </div>
 
             {/* Guarantee + total */}
-            <div className="px-5 py-3.5 flex items-center gap-3 border-b border-[#E8E8F2]">
+            <div className="px-5 py-3.5 flex items-center gap-3">
               <GuaranteeBadge size="sm" />
               <div className="flex flex-col items-end flex-1 gap-1.5">
-                <span className="bg-[#EEF0FF] text-[#4B4FD9] text-[10.5px] font-bold px-3 py-[3px] rounded-full whitespace-nowrap">
+                <span className="bg-[#4B4FD9] text-white text-[10.5px] font-bold px-3 py-[3px] rounded-[3px] whitespace-nowrap">
                   {financing.label}
                 </span>
                 <div className="flex items-baseline gap-2">
                   {savings > 0 && (
                     <span className="text-[13px] font-medium text-[#9898B0] line-through">${compareTotal.toFixed(2)}</span>
                   )}
-                  <span className="text-[26px] font-extrabold text-[#1A1A2E] tracking-tight leading-none">
+                  <span className="text-[26px] font-extrabold text-[#4B4FD9] tracking-tight leading-none">
                     ${total.toFixed(2)}
                   </span>
                 </div>
@@ -144,7 +170,7 @@ export function ReviewPanelF1735({ reviewItems, total, compareTotal, onQuantityC
 
             {/* Savings */}
             {savings > 0 && (
-              <div className="px-5 py-2.5 text-center text-[11.5px] font-semibold text-[#1A7A4A] border-b border-[#E8E8F2]">
+              <div className="px-5 py-2.5 text-center text-[11.5px] font-semibold text-[#1A7A4A]">
                 Congrats! You're saving ${savings.toFixed(2)} on your security bundle!
               </div>
             )}
@@ -160,7 +186,7 @@ export function ReviewPanelF1735({ reviewItems, total, compareTotal, onQuantityC
             {/* Save */}
             <div className="px-5 pb-5 text-center">
               <button onClick={() => { onSave(); setSaved(true); setTimeout(() => setSaved(false), 2500); }}
-                className="text-[12px] italic text-[#6B6B80] hover:text-[#4B4FD9] underline underline-offset-2 transition-colors">
+                className="text-[14px] italic text-[#484848] hover:text-[#4B4FD9] underline underline-offset-2 transition-colors">
                 {saved
                   ? <span className="not-italic font-semibold text-[#1A7A4A] no-underline">✓ System saved!</span>
                   : 'Save my system for later'}

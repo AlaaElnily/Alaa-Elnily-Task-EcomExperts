@@ -1,72 +1,16 @@
 import React from "react";
 import { ProductCardF1735, ProductCardF1736 } from "./ProductCard";
 
+const STEP_ICON_MAP = {
+  camera:  '/images/icon-camera.svg',
+  shield:  '/images/icon-shield.svg',
+  sensor:  '/images/icon-sensor.svg',
+  grid:    '/images/icon-grid.svg',
+};
+
 function StepIcon({ type }) {
-  if (type === "camera")
-    return (
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M23 7l-7 5 7 5V7z" />
-        <rect x="1" y="5" width="15" height="14" rx="2" />
-      </svg>
-    );
-  if (type === "shield")
-    return (
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-      </svg>
-    );
-  if (type === "sensor")
-    return (
-      <svg
-        width="14"
-        height="14"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="2" y="3" width="20" height="14" rx="2" />
-        <line x1="8" y1="21" x2="16" y2="21" />
-        <line x1="12" y1="17" x2="12" y2="21" />
-      </svg>
-    );
-  return (
-    <svg
-      width="14"
-      height="14"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <rect x="3" y="3" width="7" height="7" />
-      <rect x="14" y="3" width="7" height="7" />
-      <rect x="3" y="14" width="7" height="7" />
-      <rect x="14" y="14" width="7" height="7" />
-    </svg>
-  );
+  const src = STEP_ICON_MAP[type] ?? STEP_ICON_MAP.grid;
+  return <img src={src} alt="" className="w-[26px] h-[26px] object-contain flex-shrink-0" />;
 }
 
 export default function AccordionStep({
@@ -94,24 +38,20 @@ export default function AccordionStep({
       {/* ── Collapsed header: flat row with top border ── */}
       {!isOpen && (
         <div className="border-b border-black border-b-[0.5px]">
-          
           <button
             onClick={onToggle}
             className="w-full flex items-center justify-between py-[15px] text-left"
           >
             <div className="flex flex-col gap-[5px] w-full">
-              <span className="text-[9.5px] font-semibold tracking-[0.13em] uppercase text-[#9898B0] px-[15px]">
+              <span className="text-[12px] font-normal tracking-[0.13em] uppercase text-[#484848] px-[15px]">
                 STEP {step.stepNumber} OF 4
               </span>
-              <div className="flex justify-between border-t-[0.5px] border-t border-black w-full px-[15px] pt-5">
+              <div className="flex justify-between border-t border-black border-t-[0.5px] w-full px-[15px] pt-5">
                 <div className="flex items-center gap-2.5">
-
-                <span className="w-7 h-7 rounded bg-white border border-[#D8D9F9] flex items-center justify-center text-[#4B4FD9] flex-shrink-0">
                   <StepIcon type={step.icon} />
-                </span>
-                <span className="text-[22px] font-bold text-[#1A1A2E] tracking-tight">
-                  {step.title}
-                </span>
+                  <span className="text-[22px] font-normal text-[#0B0D10] tracking-tight">
+                    {step.title}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1.5 flex-shrink-0">
                   {selectedCount > 0 && (
@@ -119,18 +59,7 @@ export default function AccordionStep({
                       {selectedCount} selected
                     </span>
                   )}
-                 <svg
-                width="15"
-                height="15"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="#4B4FD9"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                    <polyline points="18 15 12 9 6 15" />
-                  </svg>
+                  <img src="/images/carrot-up.svg" alt="" className="w-3 h-3 rotate-180" />
                 </div>
               </div>
             </div>
@@ -147,18 +76,15 @@ export default function AccordionStep({
             className="w-full flex items-center justify-between py-[15px] text-left"
           >
             <div className="flex flex-col gap-[5px] w-full">
-              <span className="text-[9.5px] font-semibold tracking-[0.13em] uppercase text-[#9898B0] px-[15px]">
+              <span className="text-[12px] font-normal tracking-[0.13em] uppercase text-[#484848] px-[15px]">
                 STEP {step.stepNumber} OF 4
               </span>
-              <div className="flex justify-between border-t-[0.5px] border-t border-black w-full px-[15px] pt-5">
+              <div className="flex justify-between border-t border-black border-t-[0.5px] w-full px-[15px] pt-5">
                 <div className="flex items-center gap-2.5">
-
-                <span className="w-7 h-7 rounded bg-white border border-[#D8D9F9] flex items-center justify-center text-[#4B4FD9] flex-shrink-0">
                   <StepIcon type={step.icon} />
-                </span>
-                <span className="text-[22px] font-bold text-[#1A1A2E] tracking-tight">
-                  {step.title}
-                </span>
+                  <span className="text-[22px] font-normal text-[#0B0D10] tracking-tight">
+                    {step.title}
+                  </span>
                 </div>
                 <div className="flex items-center gap-1.5 flex-shrink-0">
                   {selectedCount > 0 && (
@@ -166,18 +92,7 @@ export default function AccordionStep({
                       {selectedCount} selected
                     </span>
                   )}
-                  <svg
-                    width="15"
-                    height="15"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="#4B4FD9"
-                    strokeWidth="2.5"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <polyline points="18 15 12 9 6 15" />
-                  </svg>
+                  <img src="/images/carrot-up.svg" alt="" className="w-3 h-3" />
                 </div>
               </div>
             </div>

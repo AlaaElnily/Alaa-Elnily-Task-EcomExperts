@@ -14,7 +14,7 @@
           "badge": "Save 22%",
           "comparePrice": 35.98,
           "price": 27.98,
-          "image": "https://images.unsplash.com/photo-1585771724684-38269d6639fd?w=120&h=120&fit=crop&crop=center",
+          "image": "/images/wyze-cam-v4.png",
           "learnMore": "#",
           "variants": [
             { "id": "wyze-cam-v4-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC" },
@@ -29,7 +29,7 @@
           "badge": "Save 12%",
           "comparePrice": 39.98,
           "price": 34.98,
-          "image": "https://images.unsplash.com/photo-1557597774-9d273605dfa9?w=120&h=120&fit=crop&crop=center",
+          "image": "/images/wyze-cam-pan-v3.png",
           "learnMore": "#",
           "variants": [
             { "id": "wyze-pan-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC" },
@@ -43,7 +43,7 @@
           "badge": "Save 22%",
           "comparePrice": 89.98,
           "price": 69.98,
-          "image": "https://images.unsplash.com/photo-1558002038-1055907df827?w=120&h=120&fit=crop&crop=center",
+          "image": "/images/wyze-cam-floodlight.png",
           "learnMore": "#",
           "variants": [
             { "id": "wyze-flood-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC" },
@@ -57,7 +57,7 @@
           "badge": null,
           "comparePrice": null,
           "price": 69.98,
-          "image": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=120&h=120&fit=crop&crop=center",
+          "image": "/images/wyze-doorbell.png",
           "learnMore": "#",
           "variants": []
         },
@@ -68,7 +68,7 @@
           "badge": null,
           "comparePrice": null,
           "price": 89.98,
-          "image": "https://images.unsplash.com/photo-1592833167665-ebf9d000b4e0?w=120&h=120&fit=crop&crop=center",
+          "image": "/images/wyze-battery-cam.png",
           "learnMore": "#",
           "variants": [
             { "id": "wyze-batt-white", "label": "White", "color": "#E8E8E8", "border": "#CCCCCC" },

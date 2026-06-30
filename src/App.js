@@ -61,8 +61,8 @@ export default function App() {
 
       {/* ── Frame 1735: two-column ── */}
       {viewMode === 'f1735' && (
-        <main className="container m-auto">
-          <div className='max-w-[1196px] pb-16 grid lg:grid-cols-[1fr_400px] gap-6 m-auto'>
+        <main className="container m-auto px-4">
+          <div className='max-w-[1196px] pt-2 pb-16 grid lg:grid-cols-[1fr_400px] gap-6 m-auto'>
           {/* Builder */}
           <section className="flex flex-col min-w-0 max-w-[100vw]">
             {catalog.steps.map((step, idx) => (
